@@ -33,8 +33,7 @@ $(function () {
     createPlatform(200, 650, 150, 20, "pink");
     createPlatform(800, 450, 150, 20, "purple");
     createPlatform(500, 550, 150, 20, "blue");
-    createPlatform(
-      0, 200, 150, 20, "black");
+    createPlatform(0, 200, 150, 20, "black");
     createPlatform(1100, 500, 150, 20, "gray");
 
 

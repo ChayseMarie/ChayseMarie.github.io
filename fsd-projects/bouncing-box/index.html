@@ -8,7 +8,7 @@
       .box {
         width: 70px;
         height: 70px;
-        background-color: teal;
+        background-color: pink;
         font-size: 300%;
         text-align: center;
         user-select: none;
@@ -40,6 +40,7 @@
         //////////////////////////////////////////////////////////////////
 
         var box = jQuery(".box"); // reference to the HTML .box element
+        var boxWidth = box.width()
         var board = jQuery(".board"); // reference to the HTML .board element
         var boardWidth = board.width(); // the maximum X-Coordinate of the screen
 
@@ -69,8 +70,9 @@
         //////////////////////////////////////////////////////////////////
 
         // TODO 2 - Variable declarations
-
-
+        var positionX = 0;
+        var points = 0;
+        var speed = 10;
 
 
 
@@ -80,6 +82,16 @@
          * If the box drifts off the screen, turn it around!
          */
         function update() {
+          positionX = positionX + speed;
+        moveBoxTo(positionX);
+        if (positionX + boxWidth > boardWidth) { 
+          speed *= -1;
+        }
+        if (positionX < 0) {
+          speed *= -1;
+        }
+
+        
 
         
 
@@ -94,6 +106,12 @@
          * - move the box to the left side of the screen.
          */
         function handleBoxClick() {
+        speed = speed + 3;
+          points++;
+        positionX = 0;
+        changeBoxText(points);
+        
+
 
 
 
