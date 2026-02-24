@@ -106,8 +106,8 @@ function update() {
   // loop over the ghosts array. We use the maxGhosts variable instead of ghosts.length
   // to make seeing issues in the debugger slightly easier (in practice, you should use
   // ghosts.length, but do NOT change it here)
-  for (var i = 0; i < maxGhosts; i++) {
-    var ghost = ghosts[j];
+  for (var i = 0; i < maxGhosts = 1; i++) {
+    var ghost = ghosts[i];
 
     // move the ghost
     moveGhost(ghost);
