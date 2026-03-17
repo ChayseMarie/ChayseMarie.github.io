@@ -12,7 +12,6 @@ var highScoreElement = $("#highScore");
 // Game Variables
 var score = 0; // variable to keep track of the score
 var started = false; // variable to keep track of whether the game has started
-
 // TODO 4, Part 1: Create the apple variable
 var apple = {};
 
@@ -47,14 +46,12 @@ $("body").on("keydown", handleKeyDown);
 init();
 
 function init() {
-  makeApple()
+
   // TODO 5, Part 2: initialize the snake
-  makeSnakeSquare(row, column)
-  <div> 
 
   
   // TODO 4, Part 3: initialize the apple
-
+makeApple();
 
   // TODO 6, Part 1: Initialize the interval
 
@@ -232,7 +229,27 @@ repositionSquare(apple);
  */
 function makeSnakeSquare(row, column) {
   // TODO 5, Part 2: Fill in this function's code block
+// initialize a new snakeSquare Object
+const snakeSquare = {};
 
+// make the snakeSquare element and add it to the board
+snakeSquare.element = $("<div>").addClass("snake").appendTo(board);
+
+// assign the row and column position
+snakeSquare.row = row;
+snakeSquare.column = column;
+
+// set the snake’s position visually
+repositionSquare(snakeSquare);
+
+// if this is the head, give it a unique ID
+if (snake.body.length === 0) {
+  snakeSquare.element.attr("id", "snake-head");
+}
+
+// add the square to the snake’s body and update the tail
+snake.body.push(snakeSquare);
+snake.tail = snakeSquare;
 
 
 
