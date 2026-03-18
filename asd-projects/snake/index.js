@@ -48,13 +48,18 @@ init();
 function init() {
 
   // TODO 5, Part 2: initialize the snake
+  snake.body = []; // Start with an empty body
+makeSnakeSquare(10, 10); // Create the first square in the middle of the board
+makeSnakeSquare(10, 9); // Create a second square to the left of the first
+makeSnakeSquare(10, 8); // Create a third square to the left of the second
+snake.head = snake.body[0]; // Mark the first segment as the head
 
   
   // TODO 4, Part 3: initialize the apple
 makeApple();
 
   // TODO 6, Part 1: Initialize the interval
-
+updateInterval = setInterval(update, 100);
 
 }
 
@@ -68,7 +73,17 @@ makeApple();
  */
 function update() {
   // TODO 6, Part 2: Fill in the update function's code block
+if (started) {
+  moveSnake();
+}
 
+if (hasHitWall() || hasCollidedWithSnake()) {
+  endGame();
+}
+
+if (hasCollidedWithApple()) {
+  handleAppleCollision();
+}
 
 
 
@@ -85,13 +100,36 @@ function checkForNewDirection(event) {
   if (activeKey === KEY.LEFT) {
     snake.head.direction = "left";
   }
+  else if (activeKey === KEY.RIGHT) {
+    snake.head.direction = "right";
+  }
+  else if (activeKey === KEY.UP) {
+    snake.head.direction = "up";
+  } 
+  else if (activeKey === KEY.DOWN) {
+    snake.head.direction = "down";
+  }
+
 
   // FILL IN THE REST
 
   // console.log(snake.head.direction);     // uncomment me!
 }
 
-function moveSnake() {
+function moveSnake() { 
+  if (snake.head.direction === "left") {
+  snake.head.column = snake.head.column - 1;
+} 
+else if (snake.head.direction === "right") {
+  snake.head.column = snake.head.column + 1;
+}
+else if (snake.head.direction === "up") {
+  snake.head.column = snake.head.column - 1;
+} 
+else if (snake.head.direction === "down") {
+  snake.head.column = snake.head.column + 1;
+} repositionSquare(snake.head)
+}
   /* 
     TODO 10: Move each part of the snake's body such that it's body follows the head.
     
@@ -268,7 +306,8 @@ snake.tail = snakeSquare;
 */
 function handleKeyDown(event) {
   // TODO 7: make the handleKeyDown function register which key is pressed
-
+activeKey = event.which;
+console.log(activeKey);
 
   // If a valid direction key is pressed, start the game
   if (
