@@ -109,30 +109,33 @@ function repostionGameItem() {
 
 
 
-  function wallCollision() {
+  
+ function wallCollision() {
   var boardWidth = $("#board").width();
   var boardHeight = $("#board").height();
+  var walkerWidth = $("#walker").width();
+  var walkerHeight = $("#walker").height();
 
+  // LEFT wall
   if (walker.x < 0) {
-    walker.x = walker.x - walker.speedX;
+    walker.x = 0;
   }
 
-
-  if (walker.x > boardWidth) {
-    walker.x = walker.x - walker.speedX;
+  // RIGHT wall
+  if (walker.x > boardWidth - walkerWidth) {
+    walker.x = boardWidth - walkerWidth;
   }
 
-  
+  // TOP wall
   if (walker.y < 0) {
-    walker.y = walker.y - walker.speedY;
+    walker.y = 0;
   }
 
-  
-  if (walker.y > boardHeight) {
-    walker.y = walker.y - walker.speedY;
+  // BOTTOM wall
+  if (walker.y > boardHeight - walkerHeight) {
+    walker.y = boardHeight - walkerHeight;
   }
 }
-
 
 
   function endGame() {
