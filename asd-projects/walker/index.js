@@ -35,7 +35,8 @@ const KEY = {
 
   Note: You can have multiple event listeners for different types of events.
   */
-  $(document).on('keydown', handleKeyDown);                          
+  $(document).on('keydown', handleKeyDown);  
+  $(document).on('keyup', handleKeyUp);                           
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -46,7 +47,9 @@ const KEY = {
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
+    repostionGameItem();
+    wallCollision();
+    redrawGameItem();
 
   }
   
@@ -57,20 +60,38 @@ const KEY = {
   Note: You can have multiple event handlers for different types of events.
   */
   function handleKeyDown(event) {
-    console.log(event.which);
-    if (event.which === KEY.LEFT) {
-  console.log("left pressed");
-    }
-   if (event.which === KEY.RIGHT) {
-  console.log("right pressed");
-}
-if (event.which === KEY.UP) {
-  console.log("up pressed");
-}
-if (event.which === KEY.DOWN) {
-  console.log("down pressed");
-}
+  if (event.which === 37) {
+    walker.speedX = -5;
+    walker.speedY = 0;
   }
+  if (event.which === 38) {
+    walker.speedX = 0;
+    walker.speedY = -5;
+  }
+  if (event.which === 39) {
+    walker.speedX = 5;
+    walker.speedY = 0;
+  }
+  if (event.which === 40) {
+    walker.speedX = 0;
+    walker.speedY = 5;
+  }
+}
+
+function handleKeyUp(event) {
+  if (event.which === 37 || event.which ===39) {
+    walker.speedX = 0;
+  }
+if (event.which === 38 || event.which === 40) {
+  walker.speedY = 0;
+}
+
+}
+
+
+
+
+
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
@@ -93,6 +114,30 @@ function repostionGameItem() {
     redrawGameItem();
   }
 
+
+  function wallCollision() {
+  var boardWidth = $("#board").width();
+  var boardHeight = $("#board").height();
+
+  if (walker.x < 0) {
+    walker.x = walker.x - walker.speedX;
+  }
+
+
+  if (walker.x > boardWidth) {
+    walker.x = walker.x - walker.speedX;
+  }
+
+  
+  if (walker.y < 0) {
+    walker.y = walker.y - walker.speedY;
+  }
+
+  
+  if (walker.y > boardHeight) {
+    walker.y = walker.y - walker.speedY;
+  }
+}
 
 
 
