@@ -10,21 +10,22 @@ function runProgram(){
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
- var walker = {
-  x: 0,
-  y: 0,
-  speedX: 0,
-  speedY: 0
- };
   
-  // Game Item Objects
-const KEY = {
-  ENTER: 13,
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-};
+  var walker = {
+    x: 0,
+    y: 0,
+    speedX: 0,
+    speedY: 0
+  };
+    
+    // Game Item Objects
+  const KEY = {
+    ENTER: 13,
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40,
+  };
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -50,7 +51,6 @@ const KEY = {
     repostionGameItem();
     wallCollision();
     redrawGameItem();
-
   }
   
   /* 
@@ -60,20 +60,20 @@ const KEY = {
   Note: You can have multiple event handlers for different types of events.
   */
   function handleKeyDown(event) {
-  if (event.which === 37) {
+  if (event.which === KEY.LEFT) {
     walker.speedX = -5;
-    walker.speedY = 0;
+    // walker.speedY = 0;
   }
-  if (event.which === 38) {
-    walker.speedX = 0;
+  if (event.which === KEY.UP) {
+    // walker.speedX = 0;
     walker.speedY = -5;
   }
-  if (event.which === 39) {
+  if (event.which === KEY.RIGHT) {
     walker.speedX = 5;
-    walker.speedY = 0;
+    // walker.speedY = 0;
   }
-  if (event.which === 40) {
-    walker.speedX = 0;
+  if (event.which === KEY.DOWN) {
+    // walker.speedX = 0;
     walker.speedY = 5;
   }
 }
@@ -100,19 +100,13 @@ function repostionGameItem() {
   walker.x = walker.x + walker.speedX;
   walker.y = walker.y + walker.speedY;
 }
-  function newFrame() {
-    repostionGameItem();
-  }
+
  
   function redrawGameItem() {
     $("#walker").css("left", walker.x);
      $("#walker").css("top", walker.y);
   }
 
-  function newFrame() {
-    repostionGameItem();
-    redrawGameItem();
-  }
 
 
   function wallCollision() {
