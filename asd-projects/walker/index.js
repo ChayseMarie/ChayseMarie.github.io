@@ -10,9 +10,21 @@ function runProgram(){
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+ var walker = {
+  x: 0,
+  y: 0,
+  speedX: 0,
+  speedY: 0
+ };
   
   // Game Item Objects
-
+const KEY = {
+  ENTER: 13,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+};
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -46,14 +58,44 @@ function runProgram(){
   */
   function handleKeyDown(event) {
     console.log(event.which);
-
+    if (event.which === KEY.LEFT) {
+  console.log("left pressed");
+    }
+   if (event.which === KEY.RIGHT) {
+  console.log("right pressed");
+}
+if (event.which === KEY.UP) {
+  console.log("up pressed");
+}
+if (event.which === KEY.DOWN) {
+  console.log("down pressed");
+}
   }
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+function repostionGameItem() {
+  walker.x = walker.x + walker.speedX;
+  walker.y = walker.y + walker.speedY;
+}
+  function newFrame() {
+    repostionGameItem();
+  }
+ 
+  function redrawGameItem() {
+    $("#walker").css("left", walker.x);
+     $("#walker").css("top", walker.y);
+  }
 
-  
+  function newFrame() {
+    repostionGameItem();
+    redrawGameItem();
+  }
+
+
+
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
